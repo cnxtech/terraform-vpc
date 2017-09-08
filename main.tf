@@ -6,9 +6,10 @@ resource "aws_vpc" "main" {
   cidr_block           = "${var.cidr_prefix}.0.0.0/16"
 
   tags {
-    Name    = "${var.tag_project_identifier}"
-    Budget  = "${var.tag_budget}"
-    Project = "${var.tag_project_identifier}"
+    Name        = "${var.tag_project_identifier}-${var.tag_environment}"
+    Environment = "${var.tag_environment}"
+    Budget      = "${var.tag_budget}"
+    Project     = "${var.tag_project_identifier}"
   }
 }
 
@@ -19,9 +20,10 @@ resource "aws_subnet" "public" {
   cidr_block        = "${var.cidr_prefix}.0.${count.index}.0/24"
 
   tags {
-    Name    = "${var.tag_project_identifier}-${format("%03d", count.index+1)}"
-    Budget  = "${var.tag_budget}"
-    Project = "${var.tag_project_identifier}"
+    Name        = "${var.tag_project_identifier}-${var.tag_environment}-${format("%03d", count.index+1)}"
+    Environment = "${var.tag_environment}"
+    Budget      = "${var.tag_budget}"
+    Project     = "${var.tag_project_identifier}"
   }
 }
 
@@ -29,9 +31,10 @@ resource "aws_internet_gateway" "main" {
   vpc_id = "${aws_vpc.main.id}"
 
   tags {
-    Name    = "${var.tag_project_identifier}"
-    Budget  = "${var.tag_budget}"
-    Project = "${var.tag_project_identifier}"
+    Name        = "${var.tag_project_identifier}-${var.tag_environment}"
+    Environment = "${var.tag_environment}"
+    Budget      = "${var.tag_budget}"
+    Project     = "${var.tag_project_identifier}"
   }
 
   depends_on = ["aws_vpc.main"]
@@ -46,9 +49,10 @@ resource "aws_route_table" "main" {
   }
 
   tags {
-    Name    = "${var.tag_project_identifier}"
-    Budget  = "${var.tag_budget}"
-    Project = "${var.tag_project_identifier}"
+    Name        = "${var.tag_project_identifier}-${var.tag_environment}"
+    Environment = "${var.tag_environment}"
+    Budget      = "${var.tag_budget}"
+    Project     = "${var.tag_project_identifier}"
   }
 
   depends_on = ["aws_vpc.main"]

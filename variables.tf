@@ -17,6 +17,8 @@ variable "tag_project_identifier" {}
 
 variable "tag_budget" {}
 
+variable "tag_environment" {}
+
 variable "aws_region" {
   default     = "eu-west-1"
   description = "AWS region to deploy resources in"
