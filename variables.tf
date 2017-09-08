@@ -1,26 +1,16 @@
 variable "enable_dns_hostnames" {
-  default = "true"
+  default     = "true"
+  description = "Indicates whether the instances launched in the VPC get public DNS hostnames"
 }
 
 variable "enable_dns_support" {
-  default = "true"
+  default     = "true"
+  description = "Indicates whether the DNS resolution is supported for the VPC"
 }
 
 variable "cidr_prefix" {
-  default = "172"
-}
-
-variable "subnet_count" {
-  default = 2
-}
-
-variable "subnet_cidr_blocks" {
-  type = "map"
-
-  default = {
-    availabilityzone_a = "172.0.1.0/24"
-    availabilityzone_b = "172.0.2.0/24"
-  }
+  default     = "172"
+  description = "Network CIDR prefix - must be a private address space"
 }
 
 variable "tag_project_identifier" {}
@@ -28,5 +18,6 @@ variable "tag_project_identifier" {}
 variable "tag_budget" {}
 
 variable "aws_region" {
-  default = "eu-west-1"
+  default     = "eu-west-1"
+  description = "AWS region to deploy resources in"
 }
