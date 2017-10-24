@@ -24,6 +24,7 @@ resource "aws_subnet" "public" {
     Environment = "${var.tag_environment}"
     Budget      = "${var.tag_budget}"
     Project     = "${var.tag_project_identifier}"
+    VpcId       = "${aws_vpc.main.id}"
   }
 }
 
@@ -35,6 +36,7 @@ resource "aws_internet_gateway" "main" {
     Environment = "${var.tag_environment}"
     Budget      = "${var.tag_budget}"
     Project     = "${var.tag_project_identifier}"
+    VpcId       = "${aws_vpc.main.id}"
   }
 
   depends_on = ["aws_vpc.main"]
@@ -53,6 +55,7 @@ resource "aws_route_table" "main" {
     Environment = "${var.tag_environment}"
     Budget      = "${var.tag_budget}"
     Project     = "${var.tag_project_identifier}"
+    VpcId       = "${aws_vpc.main.id}"
   }
 
   depends_on = ["aws_vpc.main"]
